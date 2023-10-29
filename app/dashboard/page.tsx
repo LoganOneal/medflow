@@ -44,7 +44,7 @@ const Chat = () => {
       endpoint="api/chat"
       emoji=""
       titleText=""
-      placeholder="I'm an LLM pretending to be a pirate! Ask me about the pirate life!"
+      placeholder="I can provide insights into your patients' health. Ask me a question!"
       emptyStateComponent={Placeholder}
     ></ChatWindow>
   )
@@ -68,8 +68,8 @@ const ChatArea = () => {
 }
 
 export const metadata: Metadata = {
-  title: "Playground",
-  description: "The OpenAI Playground built using the components.",
+  title: "My Chats",
+  description: "Medchats with insights for all of my patients.",
 }
 
 export default function PlaygroundPage() {
