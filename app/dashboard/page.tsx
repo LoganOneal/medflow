@@ -45,11 +45,7 @@ const Chat = () => {
       endpoint="api/chat"
       emoji=""
       titleText=""
-<<<<<<< HEAD
-      placeholder="Please enter a question regarding patient John Doe."
-=======
       placeholder="Ask me anything about John Doe"
->>>>>>> 64a6e04903e31efcd2afa9d3d827145e62f07bef
       emptyStateComponent={Placeholder}
     ></ChatWindow>
   )
