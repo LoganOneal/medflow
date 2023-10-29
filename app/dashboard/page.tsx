@@ -72,7 +72,7 @@ export default function PlaygroundPage() {
 
       <div className="hidden h-fit- flex-col md:flex">
         <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center md:h-16">
-          <h2 className="text-2xl font-semibold">MediChat: John Doe</h2>
+          <h2 className="text-2xl font-semibold">MedChat: John Doe</h2>
           <div className="ml-auto flex  space-x-2 sm:justify-end">
             <PresetSelector presets={presets} />
             {/* <PresetSave /> */}

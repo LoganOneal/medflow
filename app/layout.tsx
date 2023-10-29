@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>medchat</title>
+        <title>Medchat</title>
         <link rel="shortcut icon" href="/images/favicon.ico" />
         <meta
           name="description"
@@ -37,8 +37,8 @@ export default function RootLayout({
         <meta name="twitter:image" content="/images/og-image.png" />
       </head>
       <UserProvider>
-        <body>
-          <div className="flex flex-col md:px-12 h-screen">
+        <body className="bg-slate-100">
+          <div className="flex flex-col md:px-12 h-screen bg-slate-100">
             <div className="border-b">
             <div className="flex h-16 items-center px-4">
               <TeamSwitcher className="mr-4" />
