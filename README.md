@@ -1,116 +1,45 @@
-# 🦜️🔗 LangChain + Next.js Starter Template
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/langchain-ai/langchain-nextjs-template)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Flangchain-nextjs-template)
-
-This template scaffolds a LangChain.js + Next.js starter app. It showcases how to use and combine LangChain modules for several
-use cases. Specifically:
-
-- [Simple chat](/app/api/chat/route.ts)
-- [Returning structured output from an LLM call](/app/api/chat/structured_output/route.ts)
-- [Answering complex, multi-step questions with agents](/app/api/chat/agents/route.ts)
-- [Retrieval augmented generation (RAG) with a chain and a vector store](/app/api/chat/retrieval/route.ts)
-- [Retrieval augmented generation (RAG) with an agent and a vector store](/app/api/chat/retrieval_agents/route.ts)
-
-Most of them use Vercel's [AI SDK](https://github.com/vercel-labs/ai) to stream tokens to the client and display the incoming messages.
-
-![Demo GIF](/public/images/agent-convo.gif)
-
-You can check out a hosted version of this repo here: https://langchain-nextjs-template.vercel.app/
-
-## 🚀 Getting Started
-
-First, clone this repo and download it locally.
-
-Next, you'll need to set up environment variables in your repo's `.env.local` file. Copy the `.env.example` file to `.env.local`.
-To start with the basic examples, you'll just need to add your OpenAI API key.
-
-Next, install the required packages using your preferred package manager (e.g. `yarn`).
-
-Now you're ready to run the development server:
-
+## Installation
 ```bash
+yarn install
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result! Ask the bot something and you'll see a streamed response:
+## Inspiration
+### The Healthcare Industry in the Untied States is in the midst of a crisis due to the following challenges: 
+-  **Growing Demand:** The demand for healthcare services in the United States is steadily increasing due to factors like an aging population, rising chronic disease prevalence, and advances in medical treatments.
 
-![A streaming conversation between the user and the AI](/public/images/chat-conversation.png)
+- **Physician Shortage:** The Association of American Medical Colleges (AAMC) projects a shortage of up to 139,000 physicians by 2033. 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Nurse Shortage:** The American Nurses Association (ANA) predicts a shortage of more than one million registered nurses by 2022.
 
-Backend logic lives in `app/api/chat/route.ts`. From here, you can change the prompt and model, or add other modules and logic.
+- **Primary Care Deficit:** There is a significant shortage of primary care providers, including family physicians, general internists, and pediatricians. This impact of this is felt the most in rural areas.
 
-## 🧱 Structured Output
+- **Geographic Disparities:** Rural areas, like most of Tennessee, often face more severe shortages of healthcare professionals compared to urban areas. Access to care is a major concern in these regions.
 
-The second example shows how to have a model return output according to a specific schema using OpenAI Functions.
-Click the `Structured Output` link in the navbar to try it out:
+In order to address these deficits, we focused on improving the efficiency of the healthcare ecosystem by building a platform that **consolidates** and **streamlines** medical data through  an **easily accessible and adaptable natural language interface**. 
 
-![A streaming conversation between the user and an AI agent](/public/images/structured-output-conversation.png)
+## What it does
+Medchat gives medical professionals quick and efficient access to a wide variety of EMR (Electronic Health Record) systems through natural language. It provides a natural language chat interface, enabling doctors and nurses to engage in conversations while simultaneously accessing and updating patient data in real-time, integrating with pre-existing EMR databases. 
 
-The chain in this example uses a [popular library called Zod](https://zod.dev) to construct a schema, then formats it in the way OpenAI expects.
-It then passes that schema as a function into OpenAI and passes a `function_call` parameter to force OpenAI to return arguments in the specified format.
+This enables medical professionals to:
+1. Streamline and optimize their workflows  **-> saving time**
+2. Provide fully context-aware answers to complex medical questions **-> reducing preventable harm**
+3. Better curate the overall patient experience **-> improving patient relationships**
 
-For more details, [check out this documentation page](https://js.langchain.com/docs/modules/chains/popular/structured_output).
+## How we built it
+LLMs are powerful at generating text, but they can struggle to find relevant information with large contexts. Vector databases, on the other hand, are very efficient at finding similar vectors in a high-dimensional space, making them better at finding relevant information. Medchat uses [Langchain](https://www.langchain.com/) to query a wide variety of databases (like EMRs) using natural language. **The combination of vector database technologies and LLMs is what enables our technology to quickly and effectively retrieve fully context-aware information**. 
 
-## 🦜 Agents
+## Challenges we ran into
+* This was all of our first experience working with vector databases / langchain. 
+* We wanted to use the most recent version of NextJS and had to learn how to use the new app router project layout 
 
-To try out the agent example, you'll need to give the agent access to the internet by populating the `SERPAPI_API_KEY` in `.env.local`.
-Head over to [the SERP API website](https://serpapi.com/) and get an API key if you don't already have one.
+## Accomplishments that we're proud of
+* We embraced the growth mindset and were willing to work with technologies we did not have previous experience with 
+* We built a fully functional MVP that effectively demonstrates our use case and product potential
+* We worked together as a team, practicing active listening and taking all perspectives into account 
 
-You can then click the `Agent` example and try asking it more complex questions:
+## What we learned
+Through talking to the medical professionals at Vandyhacks, external research, and ideation as a team we gained invaluable insights into the needs of the medical industry. We also gained experience with a variety of new and bleeding edge technologies such a NextJS, Langchain, Tailwind, and Vector based databases. 
 
-![A streaming conversation between the user and an AI agent](/public/images/agent-conversation.png)
-
-This example uses the OpenAI Functions agent, but there are a few other options you can try as well.
-See [this documentation page for more details](https://js.langchain.com/docs/modules/agents/agent_types/).
-
-## 🐶 Retrieval
-
-The retrieval examples both use Supabase as a vector store. However, you can swap in
-[another supported vector store](https://js.langchain.com/docs/modules/data_connection/vectorstores/integrations/) if preferred by changing
-the code under `app/api/retrieval/ingest/route.ts`, `app/api/chat/retrieval/route.ts`, and `app/api/chat/retrieval_agents/route.ts`.
-
-For Supabase, follow [these instructions](https://js.langchain.com/docs/modules/data_connection/vectorstores/integrations/supabase) to set up your
-database, then get your database URL and private key and paste them into `.env.local`.
-
-You can then switch to the `Retrieval` and `Retrieval Agent` examples. The default document text is pulled from the LangChain.js retrieval
-use case docs, but you can change them to whatever text you'd like.
-
-For a given text, you'll only need to press `Upload` once. Pressing it again will re-ingest the docs, resulting in duplicates.
-You can clear your Supabase vector store by navigating to the console and running `DELETE FROM docuemnts;`.
-
-After splitting, embedding, and uploading some text, you're ready to ask questions!
-
-![A streaming conversation between the user and an AI retrieval chain](/public/images/retrieval-chain-conversation.png)
-
-![A streaming conversation between the user and an AI retrieval agent](/public/images/retrieval-agent-conversation.png)
-
-For more info on retrieval chains, [see this page](https://js.langchain.com/docs/use_cases/question_answering/).
-The specific variant of the conversational retrieval chain used here is composed using LangChain Expression Language, which you can
-[read more about here](https://js.langchain.com/docs/guides/expression_language/cookbook). This chain example will also return cited sources
-via header in addition to the streaming response.
-
-For more info on retrieval agents, [see this page](https://js.langchain.com/docs/use_cases/question_answering/conversational_retrieval_agents).
-
-## 📚 Learn More
-
-The example chains in the `app/api/chat/route.ts` and `app/api/chat/retrieval/route.ts` files use
-[LangChain Expression Language](https://js.langchain.com/docs/guides/expression_language/interface) to
-compose different LangChain modules together. You can integrate other retrievers, agents, preconfigured chains, and more too, though keep in mind
-`BytesOutputParser` is meant to be used directly with model output.
-
-To learn more about what you can do with LangChain.js, check out the docs here:
-
-- https://js.langchain.com/docs/
-
-## ▲ Deploy on Vercel
-
-When ready, you can deploy your app on the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## Thank You!
-
-Thanks for reading! If you have any questions or comments, reach out to us on Twitter
-[@LangChainAI](https://twitter.com/langchainai), or [click here to join our Discord server](https://discord.gg/langchain).
+## What's next for Medchat
+Moving forward, we plan to expand the capabilities of Medchat by incorporating advanced AI-driven features for diagnosis assistance and treatment suggestions. Additionally, we aim to integrate with more EHR systems to ensure broader compatibility. Continuous user feedback and ongoing collaboration with healthcare professionals will remain integral to our development process, ensuring Medchat evolves to meet the evolving needs of the healthcare industry.
