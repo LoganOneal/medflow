@@ -2,6 +2,8 @@ import { ChatWindow } from "@/components/ChatWindow";
 import { Metadata } from "next"
 import Image from "next/image"
 // import { CounterClockwiseClockIcon } from "@radix-ui/react-icons"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 
 import { Button } from "@/components/ui/button"
 import {
@@ -32,8 +34,7 @@ import { models, types } from "@/data/models"
 import { presets } from "@/data/presets"
 
 const Placeholder = (
-  <div className="h-96">
-    
+  <div>
   </div>
 );
 
@@ -41,13 +42,30 @@ const Chat = () => {
   return (
     <ChatWindow
       endpoint="api/chat"
-      emoji="🏴‍☠️"
-      titleText="Patchy the Chatty Pirate"
+      emoji=""
+      titleText=""
       placeholder="I'm an LLM pretending to be a pirate! Ask me about the pirate life!"
       emptyStateComponent={Placeholder}
     ></ChatWindow>
   )
 } 
+
+const ChatArea = () => {
+  return (
+    <div className="h-full w-full bg-slate-300 overflow-auto">
+      <div className="h-28 w-full bg-slate-400 flex flex-col justify-center items-center sticky top-0 z-10">
+        <Avatar className="h-16 w-16">
+          <AvatarImage src="" />
+          <AvatarFallback>JD</AvatarFallback>
+        </Avatar>
+        <p>John Doe</p>
+      </div>
+      <div>
+        <Chat />
+      </div>
+    </div>
+  )
+}
 
 export const metadata: Metadata = {
   title: "Playground",
@@ -73,7 +91,7 @@ export default function PlaygroundPage() {
           className="hidden dark:block"
         />
       </div>
-      <div className="hidden h-full flex-col md:flex">
+      <div className="bg-slate-200 hidden h-fit- flex-col md:flex">
         <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
           <h2 className="text-lg font-semibold">Playground</h2>
           <div className="ml-auto flex w-full space-x-2 sm:justify-end">
@@ -275,7 +293,7 @@ export default function PlaygroundPage() {
               </div>
               <div className="md:order-1">
                 <TabsContent value="complete" className="mt-0 border-0 p-0">
-                  <div className="flex h-full flex-col space-y-4">
+                  <div className="flex h-screen flex-col space-y-4">
 
 
 
@@ -285,20 +303,20 @@ export default function PlaygroundPage() {
                       placeholder="Write a tagline for an ice cream shop"
                       className="min-h-[400px] flex-1 p-4 md:min-h-[700px] lg:min-h-[700px]"
                     /> */}
-                    <Chat />
+                    <ChatArea />
 
 
 
 
 
 
-                    <div className="flex items-center space-x-2">
+                    {/* <div className="flex items-center space-x-2">
                       <Button>Submit</Button>
                       <Button variant="secondary">
                         <span className="sr-only">Show history</span>
-                        {/*<CounterClockwiseClockIcon className="h-4 w-4" />*/}
+                        <CounterClockwiseClockIcon className="h-4 w-4" />
                       </Button>
-                    </div>
+                    </div> */}
                   </div>
                 </TabsContent>
                 <TabsContent value="insert" className="mt-0 border-0 p-0">
@@ -311,7 +329,7 @@ export default function PlaygroundPage() {
                       <div className="rounded-md border bg-muted"></div>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <Button>Submit</Button>
+                      {/* <Button>Submit</Button> */}
                       <Button variant="secondary">
                         <span className="sr-only">Show history</span>
                         {/*<CounterClockwiseClockIcon className="h-4 w-4" />*/}
@@ -342,7 +360,7 @@ export default function PlaygroundPage() {
                       <div className="mt-[21px] min-h-[400px] rounded-md border bg-muted lg:min-h-[700px]" />
                     </div>
                     <div className="flex items-center space-x-2">
-                      <Button>Submit</Button>
+                      {/* <Button>Submit</Button> */}
                       <Button variant="secondary">
                         <span className="sr-only">Show history</span>
                         {/*<CounterClockwiseClockIcon className="h-4 w-4" />*/}
