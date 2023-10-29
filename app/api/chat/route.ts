@@ -1,69 +1,169 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Message as VercelChatMessage, StreamingTextResponse } from "ai";
 
+import { createClient } from "@supabase/supabase-js";
+
 import { ChatOpenAI } from "langchain/chat_models/openai";
-import { BytesOutputParser } from "langchain/schema/output_parser";
 import { PromptTemplate } from "langchain/prompts";
+import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
+import { Document } from "langchain/document";
+import {
+  RunnableSequence,
+  RunnablePassthrough,
+} from "langchain/schema/runnable";
+import {
+  BytesOutputParser,
+  StringOutputParser,
+} from "langchain/schema/output_parser";
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 
 export const runtime = "edge";
 
-const formatMessage = (message: VercelChatMessage) => {
-  return `${message.role}: ${message.content}`;
+const combineDocumentsFn = (docs: Document[], separator = "\n\n") => {
+  const serializedDocs = docs.map((doc) => doc.pageContent);
+  return serializedDocs.join(separator);
 };
 
-const TEMPLATE = `You are a pirate named Patchy. All responses must be extremely verbose and in pirate dialect.
+const formatVercelMessages = (chatHistory: VercelChatMessage[]) => {
+  const formattedDialogueTurns = chatHistory.map((message) => {
+    if (message.role === "user") {
+      return `Human: ${message.content}`;
+    } else if (message.role === "assistant") {
+      return `Assistant: ${message.content}`;
+    } else {
+      return `${message.role}: ${message.content}`;
+    }
+  });
+  return formattedDialogueTurns.join("\n");
+};
 
-Current conversation:
-{chat_history}
+const CONDENSE_QUESTION_TEMPLATE = `Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question, in its original language.
 
-User: {input}
-AI:`;
+<chat_history>
+  {chat_history}
+</chat_history>
+
+Follow Up Input: {question}
+Standalone question:`;
+const condenseQuestionPrompt = PromptTemplate.fromTemplate(
+  CONDENSE_QUESTION_TEMPLATE,
+);
+
+const ANSWER_TEMPLATE = `You are a doctor retreiving medical advice. Speak professionally in english and explain all complex terms simply.
+
+Answer the question based only on the following context and chat history:
+<context>
+  {context}
+</context>
+
+<chat_history>
+  {chat_history}
+</chat_history>
+
+Question: {question}
+`;
+const answerPrompt = PromptTemplate.fromTemplate(ANSWER_TEMPLATE);
 
 /**
- * This handler initializes and calls a simple chain with a prompt,
- * chat model, and output parser. See the docs for more information:
+ * This handler initializes and calls a retrieval chain. It composes the chain using
+ * LangChain Expression Language. See the docs for more information:
  *
- * https://js.langchain.com/docs/guides/expression_language/cookbook#prompttemplate--llm--outputparser
+ * https://js.langchain.com/docs/guides/expression_language/cookbook#conversational-retrieval-chain
  */
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const messages = body.messages ?? [];
-    const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
+    const previousMessages = messages.slice(0, -1);
     const currentMessageContent = messages[messages.length - 1].content;
-    const prompt = PromptTemplate.fromTemplate(TEMPLATE);
-    /**
-     * You can also try e.g.:
-     *
-     * import { ChatAnthropic } from "langchain/chat_models/anthropic";
-     * const model = new ChatAnthropic({});
-     *
-     * See a full list of supported models at:
-     * https://js.langchain.com/docs/modules/model_io/models/
-     */
+
     const model = new ChatOpenAI({
-      temperature: 0.8,
+      modelName: "gpt-3.5-turbo",
+      temperature: 0.2
     });
-    /**
-     * Chat models stream message chunks rather than bytes, so this
-     * output parser handles serialization and byte-encoding.
-     */
-    const outputParser = new BytesOutputParser();
+
+    const client = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_PRIVATE_KEY!,
+    );
+    const vectorstore = new SupabaseVectorStore(new OpenAIEmbeddings(), {
+      client,
+      tableName: "documents",
+      queryName: "match_documents",
+    });
 
     /**
-     * Can also initialize as:
+     * We use LangChain Expression Language to compose two chains.
+     * To learn more, see the guide here:
      *
-     * import { RunnableSequence } from "langchain/schema/runnable";
-     * const chain = RunnableSequence.from([prompt, model, outputParser]);
+     * https://js.langchain.com/docs/guides/expression_language/cookbook
      */
-    const chain = prompt.pipe(model).pipe(outputParser);
+    const standaloneQuestionChain = RunnableSequence.from([
+      condenseQuestionPrompt,
+      model,
+      new StringOutputParser(),
+    ]);
 
-    const stream = await chain.stream({
-      chat_history: formattedPreviousMessages.join("\n"),
-      input: currentMessageContent,
+    let resolveWithDocuments: (value: Document[]) => void;
+    const documentPromise = new Promise<Document[]>((resolve) => {
+      resolveWithDocuments = resolve;
     });
 
-    return new StreamingTextResponse(stream);
+    const retriever = vectorstore.asRetriever({
+      callbacks: [
+        {
+          handleRetrieverEnd(documents) {
+            resolveWithDocuments(documents);
+          },
+        },
+      ],
+    });
+
+    const retrievalChain = retriever.pipe(combineDocumentsFn);
+
+    const answerChain = RunnableSequence.from([
+      {
+        context: RunnableSequence.from([
+          (input) => input.question,
+          retrievalChain,
+        ]),
+        chat_history: (input) => input.chat_history,
+        question: (input) => input.question,
+      },
+      answerPrompt,
+      model,
+    ]);
+
+    const conversationalRetrievalQAChain = RunnableSequence.from([
+      {
+        question: standaloneQuestionChain,
+        chat_history: (input) => input.chat_history,
+      },
+      answerChain,
+      new BytesOutputParser(),
+    ]);
+
+    const stream = await conversationalRetrievalQAChain.stream({
+      question: currentMessageContent,
+      chat_history: formatVercelMessages(previousMessages),
+    });
+
+    const documents = await documentPromise;
+    const serializedSources = Buffer.from(
+      JSON.stringify(
+        documents.map((doc) => {
+          return {
+            pageContent: doc.pageContent.slice(0, 50) + "...",
+            metadata: doc.metadata,
+          };
+        }),
+      ),
+    ).toString("base64");
+
+    return new StreamingTextResponse(stream, {
+      headers: {
+        "x-message-index": (previousMessages.length + 1).toString()      },
+    });
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 });
   }

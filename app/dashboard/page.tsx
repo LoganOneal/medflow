@@ -44,7 +44,7 @@ const Chat = () => {
       endpoint="api/chat"
       emoji=""
       titleText=""
-      placeholder="I'm an LLM pretending to be a pirate! Ask me about the pirate life!"
+      placeholder="Ask me anything about John Doe"
       emptyStateComponent={Placeholder}
     ></ChatWindow>
   )

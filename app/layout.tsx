@@ -15,13 +15,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Medflow</title>
+        <title>medchat</title>
         <link rel="shortcut icon" href="/images/favicon.ico" />
         <meta
           name="description"
           content="Providing deeper insights for nurses and the relationships that they hold with patients."
         />
-        <meta property="og:title" content="Medflow" />
+        <meta property="og:title" content="medchat" />
         <meta
           property="og:description"
           content="Providing deeper insights for nurses and the relationships that they hold with patients."
