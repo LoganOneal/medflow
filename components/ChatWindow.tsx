@@ -107,7 +107,7 @@ export function ChatWindow(props: {
   }
 
   return (
-    <div className={`flex flex-col items-center p-4 md:p-8 rounded grow overflow-hidden ${(messages.length > 0 ? "border" : "")}`}>
+    <div className={`flex flex-col items-center p-4 md:p-8 rounded grow overflow-hidden border`}>
       <h2 className={`${messages.length > 0 ? "" : "hidden"} text-2xl`}>{emoji} {titleText}</h2>
       {messages.length === 0 ? emptyStateComponent : ""}
       <div
@@ -128,7 +128,7 @@ export function ChatWindow(props: {
 
       {messages.length === 0 && ingestForm}
 
-      <form onSubmit={sendMessage} className="flex w-full flex-col h-80 relative">
+      <form onSubmit={sendMessage} className="flex w-full flex-col h-10 relative">
         <div className="flex">
           {intemediateStepsToggle}
         </div>

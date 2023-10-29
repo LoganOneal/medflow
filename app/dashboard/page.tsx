@@ -45,7 +45,7 @@ const Chat = () => {
       endpoint="api/chat"
       emoji=""
       titleText=""
-      placeholder="Ask me anything about John Doe"
+      placeholder="I can provide insights into your patients' health. Ask me a question!"
       emptyStateComponent={Placeholder}
     ></ChatWindow>
   )
@@ -62,8 +62,8 @@ const ChatArea = () => {
 }
 
 export const metadata: Metadata = {
-  title: "MedicChat",
-  description: "The OpenAI Playground built using the components.",
+  title: "My Chats",
+  description: "Gain deeper insights into your patients' health.",
 }
 
 export default function PlaygroundPage() {
@@ -72,7 +72,7 @@ export default function PlaygroundPage() {
 
       <div className="hidden h-fit- flex-col md:flex">
         <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center md:h-16">
-          <h2 className="text-2xl font-semibold">MediChat: John Doe</h2>
+          <h2 className="text-2xl font-semibold">MedChat: John Doe</h2>
           <div className="ml-auto flex  space-x-2 sm:justify-end">
             <PresetSelector presets={presets} />
             {/* <PresetSave /> */}

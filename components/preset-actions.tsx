@@ -54,7 +54,7 @@ export function PresetActions() {
             onSelect={() => setShowDeleteDialog(true)}
             className="text-red-600"
           >
-            Delete preset
+            Delete chat
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
