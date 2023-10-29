@@ -128,11 +128,11 @@ export function ChatWindow(props: {
 
       {messages.length === 0 && ingestForm}
 
-      <form onSubmit={sendMessage} className="flex w-full flex-col">
+      <form onSubmit={sendMessage} className="flex w-full flex-col h-80 relative">
         <div className="flex">
           {intemediateStepsToggle}
         </div>
-        <div className="flex w-full mt-4">
+        <div className="flex w-full mt-4 absolute bottom-0">
           <input
             className="grow mr-8 p-4 rounded"
             value={input}

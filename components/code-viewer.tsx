@@ -11,9 +11,9 @@ import {
 export function CodeViewer() {
   return (
     <Dialog>
-      <DialogTrigger asChild>
+      {/* <DialogTrigger asChild>
         <Button variant="secondary">View code</Button>
-      </DialogTrigger>
+      </DialogTrigger> */}
       <DialogContent className="sm:max-w-[625px]">
         <DialogHeader>
           <DialogTitle>View code</DialogTitle>
