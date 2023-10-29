@@ -3,7 +3,8 @@ import { Public_Sans } from "next/font/google";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import { Navbar } from "@/components/Navbar";
-import { UserNav } from "@/components/UserNav";
+import UserNav from "@/components/UserNav";
+import TeamSwitcher from "@/components/team-switcher";
 
 const publicSans = Public_Sans({ subsets: ["latin"] });
 
@@ -15,23 +16,23 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>LangChain + Next.js Template</title>
+        <title>medchat</title>
         <link rel="shortcut icon" href="/images/favicon.ico" />
         <meta
           name="description"
-          content="Starter template showing how to use LangChain in Next.js projects. See source code and deploy your own at https://github.com/langchain-ai/langchain-nextjs-template!"
+          content="Providing deeper insights for nurses and the relationships that they hold with patients."
         />
-        <meta property="og:title" content="LangChain + Next.js Template" />
+        <meta property="og:title" content="medchat" />
         <meta
           property="og:description"
-          content="Starter template showing how to use LangChain in Next.js projects. See source code and deploy your own at https://github.com/langchain-ai/langchain-nextjs-template!"
+          content="Providing deeper insights for nurses and the relationships that they hold with patients."
         />
         <meta property="og:image" content="/images/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="LangChain + Next.js Template" />
+        <meta name="twitter:title" content="Medflow" />
         <meta
           name="twitter:description"
-          content="Starter template showing how to use LangChain in Next.js projects. See source code and deploy your own at https://github.com/langchain-ai/langchain-nextjs-template!"
+          content="Providing deeper insights for nurses and the relationships that they hold with patients."
         />
         <meta name="twitter:image" content="/images/og-image.png" />
       </head>
@@ -39,9 +40,10 @@ export default function RootLayout({
         <body>
           <div className="flex flex-col md:px-12 h-screen">
             <div className="border-b">
-            <div className="flex h-16 items-center">
-              <Navbar className="" />
-              <div className=" flex items-center ">
+            <div className="flex h-16 items-center px-4">
+              <TeamSwitcher className="mr-4" />
+              <Navbar className="mx-6" />
+              <div className="ml-auto flex items-center space-x-4">
                 <UserNav />
               </div>
             </div>
