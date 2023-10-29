@@ -1,6 +1,33 @@
 import { ChatWindow } from "@/components/ChatWindow";
+import Head from 'next/head'
+import clientPromise from '@/app/lib/mongodb'
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 
-export default function Home() {
+type ConnectionStatus = {
+  isConnected: boolean
+}
+
+async function getProjects() {
+  try {
+    await clientPromise
+    // `await clientPromise` will use the default database passed in the MONGODB_URI
+    // However you can use another database (e.g. myDatabase) by replacing the `await clientPromise` with the following code:
+    //
+    // `const client = await clientPromise`
+    // `const db = client.db("myDatabase")`
+    //
+    // Then you can execute queries against your database like so:
+    // db.find({}) or any of the MongoDB Node Driver commands
+    console.log("is connected");
+  } catch (e) {
+    console.log("connection failed");
+  }
+}
+
+
+export default async function Home() {
+  const isConnected = await getProjects()
+
   const InfoCard = (
     <div className="p-4 md:p-8 rounded bg-[#25252d] w-full max-h-[85%] overflow-hidden">
       <h1 className="text-3xl md:text-4xl mb-4">
@@ -62,7 +89,7 @@ export default function Home() {
         <li className="text-l">
           👇
           <span className="ml-2">
-            Try asking e.g. <code>What is it like to be a pirate?</code> below!
+            Try asking e.g. <code>a question to the nurse</code> below!
           </span>
         </li>
       </ul>

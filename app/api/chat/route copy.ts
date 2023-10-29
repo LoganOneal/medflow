@@ -5,8 +5,6 @@ import { ChatOpenAI } from "langchain/chat_models/openai";
 import { BytesOutputParser } from "langchain/schema/output_parser";
 import { PromptTemplate } from "langchain/prompts";
 
-import clientPromise from "../../lib/mongodb";
-
 export const runtime = "edge";
 
 const formatMessage = (message: VercelChatMessage) => {
@@ -30,10 +28,6 @@ AI:`;
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-
-    const client = await clientPromise;
-    const db = client.db("patients_data");
-    
     const messages = body.messages ?? [];
     const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
     const currentMessageContent = messages[messages.length - 1].content;
@@ -51,6 +45,7 @@ export async function POST(req: NextRequest) {
       modelName: "gpt-3.5-turbo",
       temperature: 0.2
     });
+    
     /**
      * Chat models stream message chunks rather than bytes, so this
      * output parser handles serialization and byte-encoding.

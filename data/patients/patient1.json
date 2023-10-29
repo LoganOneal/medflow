@@ -1,0 +1,330 @@
+{
+    "patientInfo": {
+      "fullName": "John Doe",
+      "dateOfBirth": "1980-01-01",
+      "age": 42
+    },
+      "newPatient": true,
+      "allergies": "Pollen",
+      "allergicReaction": "Hives",
+      "medications": [
+        {
+          "name": "Aspirin",
+          "timesPerDay": 2,
+          "dose": "500mg"
+        },
+        {
+          "name": "Lipitor",
+          "timesPerDay": 1,
+          "dose": "20mg"
+        }
+      ],
+      "healthMaintenance": {
+        "cholesterol": {
+          "date": "2023-10-15",
+          "facilityProvider": "City Hospital",
+          "abnormalResult": false
+        },
+        "colonoscopySigmoid": {
+          "date": "2023-09-20",
+          "facilityProvider": "County Clinic",
+          "abnormalResult": true
+        },
+        "mammogram": {
+          "date": "2023-08-10",
+          "facilityProvider": "Community Health Center",
+          "abnormalResult": false
+        },
+        "papSmear": {
+          "date": "2023-07-05",
+          "facilityProvider": "Women's Wellness Clinic",
+          "abnormalResult": true
+        },
+        "boneDensity": {
+          "date": "2023-06-15",
+          "facilityProvider": "Ortho Hospital",
+          "abnormalResult": false
+        }
+      },
+      "vaccinationHistory": [
+        {
+          "diseaseCondition": "Flu",
+          "current": true,
+          "comments": "Annual shot received"
+        },
+        {
+          "diseaseCondition": "Tetanus",
+          "current": true,
+          "comments": "Booster received every 10 years"
+        }
+      ],
+      "surgeries": [
+        {
+          "type": "Appendectomy",
+          "side": "N/A",
+          "date": "2005-02-20",
+          "locationFacility": "General Hospital"
+        },
+        {
+          "type": "Knee Replacement",
+          "side": "Left",
+          "date": "2010-11-15",
+          "locationFacility": "Ortho Center"
+        }
+      ],
+      "personalMedicalHistory": [
+        "High Blood Pressure",
+        "High Cholesterol",
+        "Migraine Headaches",
+        "Diabetes (Type 2)"
+      ],
+    "womensHealthHistory": {
+      "lastMenstrualCycleDate": "2023-10-01",
+      "ageFirstMenstruation": 12,
+      "ageMenopause": 50,
+      "totalPregnancies": 2,
+      "liveBirths": 2,
+      "pregnancyComplications": "None"
+    },
+    "socialHistory": {
+      "familyMedicalHistory": {
+        "mother": true,
+        "father": true,
+        "brother": false,
+        "sister": false,
+        "child": false,
+        "mgm": true,
+        "mgf": true,
+        "pgm": false,
+        "pgf": false,
+        "other": "None"
+      },
+      "occupation": "Software Engineer",
+      "retired": false,
+      "unemployed": false,
+      "loa": false,
+      "disabled": false,
+      "employer": "TechCorp",
+      "yearsOfEducation": 16,
+      "workNightShift": false,
+      "maritalStatus": "Married",
+      "haveChildren": true,
+      "numberOfChildren": 2
+    },
+    "otherHealthIssues": {
+      "tobaccoUse": {
+        "smokeCigarettes": true,
+        "current": true,
+        "packsPerDay": 1,
+        "years": 10,
+        "past": {
+          "quitDate": "2010-05-01",
+          "packsPerDay": 0,
+          "years": 10
+        },
+        "otherTobacco": "Pipe"
+      },
+      "alcoholDrugUse": {
+        "drinkAlcohol": true,
+        "typeOfAlcohol": "Beer",
+        "numberOfDrinksPerWeek": 5,
+        "useMarijuana": false,
+        "usedNeedles": false,
+        "takenOthersDrugs": false
+      },
+      "exercise": {
+        "regularly": true,
+        "typeOfExercise": "Jogging",
+        "duration": "30",
+        "howLong": "3",
+        "howOften": "Weekly"
+      },
+      "sexualActivity": {
+        "sexuallyInvolvedCurrently": true,
+        "partners": [
+          "Female",
+          "Male"
+        ],
+        "birthControlMethod": "Pill"
+      },
+      "advanceDirectives": true
+    },
+    "specialists": {
+      "cardiology": {
+        "specialistName": "Dr. Smith",
+        "lastVisit": "2023-09-10"
+      },
+      "gastroenterologist": {
+        "specialistName": "Dr. Johnson",
+        "lastVisit": "2023-08-25"
+      },
+      "obgyn": {
+        "specialistName": "Dr. Williams",
+        "lastVisit": "2023-07-30"
+      },
+      "neurology": {
+        "specialistName": "Dr. Brown",
+        "lastVisit": "2023-09-01"
+      },
+      "pulmonary": {
+        "specialistName": "Dr. Davis",
+        "lastVisit": "2023-09-05"
+      }
+    },
+    "additionalInformation": {
+      "travelOutsideCountryLast30Days": false,
+      "servedInMilitary": true,
+      "lengthOfService": "8 years",
+      "branchOfService": "Army",
+      "deployed": true,
+      "deploymentLocation": "Iraq"
+    },
+    "sleep": {
+      "averageHours": 7
+    },
+    "diet": {
+      "rating": "Fair",
+      "wantAdvice": true
+    },
+    "safety": {
+      "useBikeHelmet": true,
+      "useSeatBeltsConsistently": true,
+      "workingSmokeDetector": true,
+      "gunsLockedUp": true,
+      "violenceAtHomeConcern": false
+    },
+      "skin": {
+        "colorChange": false,
+        "pallor": false,
+        "rash": true,
+        "wound": false
+      },
+      "genitourinary": {
+        "difficultyUrinating": false,
+        "dysuria": true,
+        "enuresis": false,
+        "flankPain": true,
+        "frequency": false,
+        "genitalSore": true,
+        "hematuria": false,
+        "penileDischarge": true,
+        "penilePain": false,
+        "penileSwelling": true,
+        "scrotalSwelling": false,
+        "testicularPain": true,
+        "urgency": false,
+        "urineDecreased": true
+      },
+      "cardiovascular": {
+        "chestPain": true,
+        "legSwelling": false,
+        "palpitations": true
+      },
+      "muscular": {
+        "arthralgias": false,
+        "backPain": true,
+        "gaitProblems": false,
+        "jointSwelling": true,
+        "myalgias": false,
+        "neckPain": true,
+        "neckStiffness": false
+      },
+      "gastrointestinal": {
+        "abdominalDistention": true,
+        "abdominalPain": false,
+        "analBleeding": true,
+        "bloodInStool": false,
+        "constipation": true,
+        "diarrhea": false,
+        "nausea": true,
+        "rectalPain": false,
+        "vomiting": true
+      },
+      "endocrine": {
+        "coldIntolerance": false,
+        "heatIntolerance": true,
+        "polydipsia": false,
+        "polyphagia": true,
+        "polyuria": false
+      },
+      "constitution": {
+        "activityChange": true,
+        "appetiteChange": false,
+        "chills": true,
+        "diaphoresis": false,
+        "fatigue": true,
+        "fever": false,
+        "weightChange": "Loss"
+      },
+      "respiratory": {
+        "apnea": true,
+        "chestTightness": false,
+        "choking": true,
+        "cough": false,
+        "shortnessOfBreath": true,
+        "stridor": false,
+        "wheezing": true
+      },
+      "eyes": {
+        "eyeDischarge": true,
+        "eyeItching": false,
+        "eyePain": true,
+        "eyeRedness": false,
+        "photophobia": true,
+        "visualDisturbance": false
+      },
+      "headEarNoseThroat": {
+        "congestion": true,
+        "dentalProblem": false,
+        "drooling": true,
+        "earDischarge": false,
+        "earPain": true,
+        "facialSwelling": false,
+        "hearingLoss": true,
+        "mouthSores": false,
+        "nosebleeds": true,
+        "postnasalDrip": false,
+        "rhinorrhea": true,
+        "sinusPressure": false,
+        "sneezing": true,
+        "soreThroat": false,
+        "tinnitus": true,
+        "troubleSwallowing": false,
+        "voiceChange": true
+      },
+      "allergyImmunology": {
+        "environmentalAllergies": true,
+        "foodAllergies": false,
+        "immunocompromised": true
+      },
+      "neurological": {
+        "dizziness": true,
+        "facialAsymmetry": false,
+        "headaches": true,
+        "lightHeadedness": false,
+        "numbness": true,
+        "seizures": false,
+        "speechDifficulty": true,
+        "syncope": false,
+        "tremors": true,
+        "weakness": false
+      },
+      "hematologic": {
+        "adenopathy": true,
+        "bruisesBleedsEasily": false
+      },
+      "psychiatric": {
+        "agitation": true,
+        "behaviorProblem": false,
+        "confusion": true,
+        "decreasedConcentration": false,
+        "dysphoricMood": true,
+        "hallucinations": false,
+        "hyperactive": true,
+        "nervousAnxious": false,
+        "selfInjury": true,
+        "sleepDisturbance": false,
+        "suicidalIdeas": true
+      }
+  }
+  
