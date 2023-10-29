@@ -1,7 +1,9 @@
 import "./globals.css";
 import { Public_Sans } from "next/font/google";
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import { Navbar } from "@/components/Navbar";
+import { UserNav } from "@/components/UserNav";
 
 const publicSans = Public_Sans({ subsets: ["latin"] });
 
@@ -33,12 +35,21 @@ export default function RootLayout({
         />
         <meta name="twitter:image" content="/images/og-image.png" />
       </head>
-      <body className={publicSans.className}>
-        <div className="flex flex-col p-4 md:p-12 h-[100vh]">
-          <Navbar></Navbar>
-          {children}
-        </div>
-      </body>
+      <UserProvider>
+        <body className={publicSans.className}>
+          <div className="flex flex-col p-4 md:p-12 h-[100vh]">
+            <div className="border-b">
+            <div className="flex h-16 items-center px-4">
+              <Navbar className="mx-6" />
+              <div className="ml-auto flex items-center space-x-4">
+                <UserNav />
+              </div>
+            </div>
+          </div>
+            {children}
+          </div>
+        </body>
+      </UserProvider>
     </html>
   );
 }
