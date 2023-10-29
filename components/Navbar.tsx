@@ -1,18 +1,42 @@
 "use client";
 
-import { usePathname } from 'next/navigation';
+import Link from "next/link"
 
-export function Navbar() {
-  const pathname = usePathname();
+import { cn } from "@/lib/utils"
+
+export function Navbar({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLElement>) {
   return (
-    <nav className="mb-4">
-      <a className={`mr-4 ${pathname === "/" ? "text-white border-b" : ""}`} href="/">🏴‍☠️ Chat</a>
-      <a className={`mr-4 ${pathname === "/structured_output" ? "text-white border-b" : ""}`} href="/structured_output">🧱 Structured Output</a>
-      <a className={`mr-4 ${pathname === "/agents" ? "text-white border-b" : ""}`} href="/agents">🦜 Agents</a>
-      <a className={`mr-4 ${pathname === "/retrieval" ? "text-white border-b" : ""}`} href="/retrieval">🐶 Retrieval</a>
-      <a className={`mr-4 ${pathname === "/retrieval_agents" ? "text-white border-b" : ""}`} href="/retrieval_agents">🤖 Retrieval Agents</a>
-      <a href="/api/auth/login">Login</a>
-      <a href="/api/auth/logout">Logout</a>
+    <nav
+      className={cn("flex items-center space-x-4 lg:space-x-6", className)}
+      {...props}
+    >
+      <Link
+        href="/examples/dashboard"
+        className="text-sm font-medium transition-colors hover:text-primary"
+      >
+        Overview
+      </Link>
+      <Link
+        href="/examples/dashboard"
+        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+      >
+        Customers
+      </Link>
+      <Link
+        href="/examples/dashboard"
+        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+      >
+        Products
+      </Link>
+      <Link
+        href="/examples/dashboard"
+        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+      >
+        Settings
+      </Link>
     </nav>
-  );
+  )
 }
