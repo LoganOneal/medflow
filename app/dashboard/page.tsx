@@ -1,3 +1,4 @@
+import { ChatWindow } from "@/components/ChatWindow";
 import { Metadata } from "next"
 import Image from "next/image"
 // import { CounterClockwiseClockIcon } from "@radix-ui/react-icons"
@@ -29,6 +30,24 @@ import { PresetShare } from "@/components/preset-share"
 // import { TopPSelector } from "@/components/top-p-selector"
 import { models, types } from "@/data/models"
 import { presets } from "@/data/presets"
+
+const Placeholder = (
+  <div className="h-96">
+    
+  </div>
+);
+
+const Chat = () => {
+  return (
+    <ChatWindow
+      endpoint="api/chat"
+      emoji="🏴‍☠️"
+      titleText="Patchy the Chatty Pirate"
+      placeholder="I'm an LLM pretending to be a pirate! Ask me about the pirate life!"
+      emptyStateComponent={Placeholder}
+    ></ChatWindow>
+  )
+} 
 
 export const metadata: Metadata = {
   title: "Playground",
@@ -257,10 +276,22 @@ export default function PlaygroundPage() {
               <div className="md:order-1">
                 <TabsContent value="complete" className="mt-0 border-0 p-0">
                   <div className="flex h-full flex-col space-y-4">
-                    <Textarea
+
+
+
+
+
+                    {/* <Textarea
                       placeholder="Write a tagline for an ice cream shop"
                       className="min-h-[400px] flex-1 p-4 md:min-h-[700px] lg:min-h-[700px]"
-                    />
+                    /> */}
+                    <Chat />
+
+
+
+
+
+
                     <div className="flex items-center space-x-2">
                       <Button>Submit</Button>
                       <Button variant="secondary">
