@@ -4,6 +4,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import { Navbar } from "@/components/Navbar";
 import UserNav from "@/components/UserNav";
+import TeamSwitcher from "@/components/team-switcher";
 
 const publicSans = Public_Sans({ subsets: ["latin"] });
 
@@ -40,6 +41,7 @@ export default function RootLayout({
           <div className="flex flex-col p-4 md:p-12 h-[100vh]">
             <div className="border-b">
             <div className="flex h-16 items-center px-4">
+              <TeamSwitcher className="mr-4" />
               <Navbar className="mx-6" />
               <div className="ml-auto flex items-center space-x-4">
                 <UserNav />
