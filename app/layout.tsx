@@ -5,6 +5,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { Navbar } from "@/components/Navbar";
 import UserNav from "@/components/UserNav";
 import TeamSwitcher from "@/components/team-switcher";
+import Image from "next/image";
 
 const publicSans = Public_Sans({ subsets: ["latin"] });
 
@@ -41,6 +42,7 @@ export default function RootLayout({
           <div className="flex flex-col md:px-12 h-screen bg-slate-100">
             <div className="border-b">
             <div className="flex h-16 items-center px-4">
+              <Image src="/images/medchat_logo_transparent.png" width={200} height={150} alt="logo" className="pr-5 ml-6"></Image>
               <TeamSwitcher className="mr-4" />
               <Navbar className="mx-6" />
               <div className="ml-auto flex items-center space-x-4">
