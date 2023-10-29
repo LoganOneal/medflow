@@ -34,9 +34,10 @@ import { models, types } from "@/data/models"
 import { presets } from "@/data/presets"
 
 const Placeholder = (
-  <div className="h-96">
+  <div className="h-48">
   </div>
 );
+
 
 const Chat = () => {
   return (
@@ -44,7 +45,7 @@ const Chat = () => {
       endpoint="api/chat"
       emoji=""
       titleText=""
-      placeholder="I'm an LLM pretending to be a pirate! Ask me about the pirate life!"
+      placeholder="Please enter a question regarding patient John Doe."
       emptyStateComponent={Placeholder}
     ></ChatWindow>
   )
@@ -61,7 +62,7 @@ const ChatArea = () => {
 }
 
 export const metadata: Metadata = {
-  title: "Playground",
+  title: "MedicChat",
   description: "The OpenAI Playground built using the components.",
 }
 
@@ -74,26 +75,21 @@ export default function PlaygroundPage() {
           <h2 className="text-2xl font-semibold">MediChat: John Doe</h2>
           <div className="ml-auto flex  space-x-2 sm:justify-end">
             <PresetSelector presets={presets} />
-            <PresetSave />
+            {/* <PresetSave /> */}
             <div className="hidden space-x-2 md:flex">
-              <CodeViewer />
-              <PresetShare />
+              {/* <CodeViewer /> */}
+              {/* <PresetShare /> */}
               </div>
             <PresetActions />
           </div>
         </div>
         <Separator />
           <div className="container h-full py-6">
-            <div className="grid h-full items-stretch gap-6 md:grid-cols-[1fr_200px]">
-              <div className="hidden flex-col space-y-4 sm:flex md:order-2 border-solid border-l-2 border-slate-200 pl-4">
-                <MaxLengthSelector defaultValue={[256]} />
-              </div>
               <div className="md:order-1">
                   <div className="flex h-screen flex-col space-y-4">
                     <ChatArea />
                   </div>
               </div>
-            </div>
           </div>
       </div>
     </>
