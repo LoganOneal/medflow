@@ -36,12 +36,12 @@ export default function RootLayout({
         <meta name="twitter:image" content="/images/og-image.png" />
       </head>
       <UserProvider>
-        <body className={publicSans.className}>
-          <div className="flex flex-col p-4 md:p-12 h-[100vh]">
+        <body>
+          <div className="flex flex-col md:px-12 h-screen">
             <div className="border-b">
-            <div className="flex h-16 items-center px-4">
-              <Navbar className="mx-6" />
-              <div className="ml-auto flex items-center space-x-4">
+            <div className="flex h-16 items-center">
+              <Navbar className="" />
+              <div className=" flex items-center ">
                 <UserNav />
               </div>
             </div>
