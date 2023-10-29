@@ -61,7 +61,7 @@ export default function UserNav() {
           <DropdownMenuSeparator />
           <a href="/api/auth/logout">
             <DropdownMenuItem>
-              Login
+              Logout
               <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
             </DropdownMenuItem>
           </a>
