@@ -3,7 +3,7 @@ import { Public_Sans } from "next/font/google";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import { Navbar } from "@/components/Navbar";
-import { UserNav } from "@/components/UserNav";
+import UserNav from "@/components/UserNav";
 
 const publicSans = Public_Sans({ subsets: ["latin"] });
 
